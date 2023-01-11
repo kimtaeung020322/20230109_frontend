@@ -80,6 +80,13 @@
   transform: scale(1.2);
 }
 
+.container.scale .box.z {
+  transform: scaleZ(1) rotateX(50deg);
+}
+.container.scale .box.z:hover {
+  transform: scaleZ(5) rotateX(50deg);
+}
+
 .container.skew .box.x:hover {
   transform: skewX(20deg);
 }
