@@ -5,9 +5,9 @@
 .container {
   display: flex; /* 아이템을 나열하고자 하는 컨테이터 요소에 지정. */
   flex-direction: row; /* 아이템들이 나열되는 방향을 지정한다. row(기본값. 행방향), column(열방향). */
-  justify-content: flex-start; /* 메인축에 대한 아이템 나열 방법. */
-  align-items: flex-start; /* 교차축에 대한 아이템 나열 방법. */
-  flex-wrap: nowrap; /* 아이템들의 너비 합의 컨테이너 커졌을 때 줄바꿈을 할 것인가 지정. */
+  justify-content: center; /* 메인축에 대한 아이템 나열 방법. */
+  /* 교차축에 대한 아이템 나열 방법. */
+  flex-wrap: nowrap; /* 아이템들의 크기 합의 컨테이너보다 커졌을 때 줄바꿈을 할 것인가 지정. */
 
   /* width: 400px; */
   height: 300px;
@@ -22,7 +22,7 @@
   align-items: center;
 
   width: 150px;
-  height: 50px;
+  /* height: 50px; */
   background-color: red;
   border: 3px solid yellow;
 
