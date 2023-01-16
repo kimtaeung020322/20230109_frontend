@@ -346,6 +346,7 @@ footer .footerRight .snsList li:nth-child(5) a img {
   width: 51px;
   height: 48px;
   cursor: pointer;
+  border: none;
   background: url("../assets/images/btn_top_04.png") no-repeat;
 }
 

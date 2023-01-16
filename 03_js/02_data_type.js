@@ -16,11 +16,11 @@ var x;
 // 숫자형(number) : 숫자를 나타내는 데이터.
 var year = 2023;
 var PI = 3.14;
-console.log(typeof year);
+console.log(typeof year); // number
 
 // 문자열(string) : 문자를 나타내는 데이터. "" 혹은 '' 사이에 문자를 작성.
 console.log(year, "year");
-console.log(typeof "year");
+console.log(typeof "year"); // string
 console.log(typeof 1, typeof "1"); // 숫자 1과 문자 "1"은 다른 값이다.
 console.log(1 + "1"); // JS에서는 문자열과 숫자의 연산에서 오류 발생 x.
 
@@ -83,3 +83,5 @@ var user03 = {
 
 console.log("두 사람의 나이차는 : ", user02.age - user03.age);
 console.log("두 사람의 키의 합은 : ", user02.height + user03.height);
+
+console.log(b);
