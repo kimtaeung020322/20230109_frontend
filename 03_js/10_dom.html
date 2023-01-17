@@ -59,6 +59,7 @@
       <button data-color="blue">파랑</button>
       <button data-color="yellow">노랑</button>
       <button data-color="black">검정</button>
+      <input type="text" />
     </div>
 
     <script>
@@ -233,6 +234,15 @@
         // 이벤트가 발생한 실제 타겟과 바인딩된 타겟이 일치할때만 실행
         if (e.target === e.currentTarget) {
           alert("체인지 박스 클릭");
+        }
+      });
+
+      // input값에 색상 입력 후 엔터 누르면 색상 변경.
+      let changeInput = document.querySelector(".changeBox input");
+
+      changeInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          item.style.backgroundColor = e.target.value;
         }
       });
     </script>
