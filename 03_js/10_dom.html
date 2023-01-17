@@ -16,6 +16,7 @@
         width: 100px;
         height: 100px;
         background-color: red;
+        box-sizing: border-box;
       }
 
       .box:hover {
@@ -29,14 +30,35 @@
       .box.on:hover {
         border-color: red;
       }
+
+      .changeBox {
+        width: 500px;
+        height: 300px;
+        border: 3px solid black;
+      }
+
+      .changeBox .item {
+        width: 100px;
+        height: 100px;
+        background-color: black;
+      }
     </style>
   </head>
   <body>
     <h1>DOM과 이벤트</h1>
     <div class="container" id="container">
+      <div class="box" onclick="alert('클릭 이벤트 발생!')"></div>
       <div class="box"></div>
       <div class="box"></div>
-      <div class="box"></div>
+    </div>
+    <button>버튼</button>
+
+    <div class="changeBox">
+      <div class="item"></div>
+      <button data-color="red" data-box-width="200px">빨강</button>
+      <button data-color="blue">파랑</button>
+      <button data-color="yellow">노랑</button>
+      <button data-color="black">검정</button>
     </div>
 
     <script>
@@ -112,6 +134,106 @@
         // else box.classList.add("on");
 
         box.classList.toggle("on");
+
+        /* 
+          이벤트
+            - 브라우저 일어나는 모든 일을 이벤트라고 부릅니다.
+              => 마우스 클릭, 키보드 입력, 로드될 때 등
+            - 이벤트가 발생했을 때 실행될 동작을 등록하는 것을 이벤트 바인딩이라고 한다.
+
+          이벤트 바인딩 방법
+            1) 인라인 방식으로 이벤트 바인딩을 할 수 있다. 'on'이라는 접두사가 붙는다.
+              => 가독성 및 유지보수 측면에서 떨어져 사용하지 않는다.
+            2) 요소의 프로퍼티를 이용해서 이벤트를 바인딩할 수 있다. 'on'이라는 접두사가 붙는다.
+              => 같은 요소에 같은 이벤트에 대해서 중복 바인딩 시 덮어쓴다.
+            3) addEventListener()를 통해서 이벤트를 바인딩할 수 있다.
+              => 첫번째 인자는 이벤트 종류를 문자열의 형태로 전달한다.
+              => 두번째 인자는 이벤트가 발생했을 때 실행할 코드를 콜백함수 형태로 전달한다.
+              => 세번째 인자는 옵션을 지정할 수 있다.
+              => 같은 이벤트에 대해서 여러개의 콜백함수를 등록할 수 있다.
+              => removeEventListener()를 통해서 등록된 이벤트 리스너를 지울 수 있다. 
+                단, 등록할 때 익명 함수가 아닌 식별자가 있는 함수로 등록해야 지울 수 있다. 이벤트의 종류도 같아야 지워진다.
+
+          Event 객체
+            - 콜백함수의 첫번째 인자로 Event 객체를 전달받는다.
+            - 발생한 이벤트에 대한 정보를 가지고 있다.
+              => 발생한 요소, 발생한 이벤트 종류, 누른 키값...
+        */
+      });
+
+      boxArr[1].onclick = function () {
+        console.log("click");
+      };
+
+      boxArr[1].onclick = function () {
+        console.log("클릭");
+      };
+
+      boxArr[2].addEventListener("click", function () {
+        console.log("click!!!");
+      });
+
+      function consoleClick() {
+        console.log("클릭!!!");
+      }
+
+      boxArr[2].addEventListener("click", consoleClick);
+
+      boxArr[2].removeEventListener("click", consoleClick);
+
+      // 버튼 클릭시 배경색 컨테이너 파란색으로 바꾸기
+      /* 
+        1. 버튼, 컨테이너 가져오기
+        2. 버튼에 이벤트 바인딩하기
+        3. 이벤트 발생시 일어날 코드 작성하기
+      */
+      document.querySelector("button").addEventListener("click", () => {
+        container.style.backgroundColor = "blue";
+      });
+
+      let btnList = document.querySelectorAll(".changeBox button");
+      let item = document.querySelector(".changeBox .item");
+      let changeBox = document.querySelector(".changeBox");
+
+      // btnList[0].addEventListener("click", function () {
+      //   item.style.backgroundColor = "red";
+      // });
+      // btnList[1].addEventListener("click", function () {
+      //   item.style.backgroundColor = "blue";
+      // });
+      // btnList[2].addEventListener("click", function () {
+      //   item.style.backgroundColor = "yellow";
+      // });
+      // btnList[3].addEventListener("click", function () {
+      //   item.style.backgroundColor = "black";
+      // });
+
+      // dataset : html의 요소에 data-라는 접두사를 붙인 속성을 작성하면
+      //            data-라는 접두사 빼고 요소.dataset에 모인다(카멜케이스).
+      btnList.forEach((btn, idx) => {
+        btn.addEventListener("click", function (e) {
+          // alert("버튼 클릭");
+          // item.style.backgroundColor = btn.dataset.color;
+          // item.style.width = btn.dataset.boxWidth;
+        });
+      });
+
+      // 이벤트 위임
+      changeBox.addEventListener("click", function (e) {
+        // e.target : 이벤트가 실제로 발생한 타겟.
+        // e.currentTarget : 이벤트가 바인딩된 요소
+        // alert("체인지 박스 클릭");
+        console.log("e.target : ", e.target);
+        console.log("e.currentTarget : ", e.currentTarget);
+
+        if (e.target.matches(".changeBox button")) {
+          item.style.backgroundColor = e.target.dataset.color;
+          item.style.width = e.target.dataset.boxWidth;
+        }
+        // 이벤트가 발생한 실제 타겟과 바인딩된 타겟이 일치할때만 실행
+        if (e.target === e.currentTarget) {
+          alert("체인지 박스 클릭");
+        }
       });
     </script>
   </body>
