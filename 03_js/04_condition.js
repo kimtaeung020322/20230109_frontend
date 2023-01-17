@@ -1,4 +1,8 @@
 /* 
+    제어문 
+      - 프로그램 흐름을 제어하는 문.
+      - 조건문과 반복문 등이 있다.
+
     조건문(conditon)
         - 조건에 따른 실행여부를 결정해서 분기처리를 한다.
 
@@ -124,7 +128,7 @@ var isEven;
 if (num % 2 === 0) isEven = "짝수";
 else isEven = "홀수";
 
-var isOdd = num % 2 === 0 ? "짝수" : "홀수";
+var isOdd = num % 2 !== 0 ? "홀수" : "짝수";
 console.log(isOdd);
 
 /* 

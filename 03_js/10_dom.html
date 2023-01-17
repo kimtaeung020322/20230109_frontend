@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM과 이벤트</title>
+    <style>
+      .container {
+        width: 500px;
+        height: 300px;
+        border: 3px solid black;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+
+      .box:hover {
+        background-color: aqua;
+      }
+
+      .box.on {
+        border: 3px solid yellow;
+      }
+
+      .box.on:hover {
+        border-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DOM과 이벤트</h1>
+    <div class="container" id="container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+
+    <script>
+      /* 
+            DOM(Document Object Model)
+                - HTML 문서를 해석(Parsing)해서 JS에서 접근할 수 있는 객체형태로 제공된다.
+                - 문서를 다룰 수 있는 다양한 프로퍼티와 메서드를 제공한다.
+        */
+
+      /* 
+            getElementById("아이디값")
+                - 인자로 전달받은 아이디 값을 가진 요소 1개를 반환한다.
+            
+            getElementsByClassName("클래스값")
+                - 인자로 전달받은 클래스 값을 가진 요소 여러개를 반환한다.
+                - HTMLCollection이라는 유사배열을 반환한다.
+                - 라이브 객체라서 다루기 까다롭다.
+
+            querySelector("선택자")
+                - 인자로 전달받은 선택자에 해당하는 요소를 1개만 반환한다.
+                - 문서의 상단에 요소 1개만 반환한다.
+
+            querySelectorAll("선택자")
+                - 인자로 전달받은 선택자에 해당하는 요소를 모두 반환한다.
+                - NodeList라는 유사배열을 반환한다.
+                - 유사배열이지만 forEach 구현되어있다.
+        */
+      let container = document.getElementById("container");
+      console.log(container);
+
+      let boxList = document.getElementsByClassName("box");
+      console.log(boxList);
+
+      let boxElem = document.querySelector(".box");
+      console.log(boxElem);
+
+      let boxArr = document.querySelectorAll(".box");
+      console.log(boxArr);
+
+      /*
+        요소의 style 속성을 통해서 스타일 변경할 수 있다.
+            => css문법을 문자열로 전달하면 된다.
+            => 요소.style.backgroundColor와 같이 세부속성을 설정할 수 있다. 카멜케이스를 사용해야한다.
+       */
+      container.style = "border-color : blue";
+      //   container.style = "background-color : #eee";
+      container.style.backgroundColor = "#eee";
+
+      for (let i = 0; i < boxList.length; i++) {
+        boxList[i].style.backgroundColor = "yellow";
+      }
+
+      boxArr.forEach(function (box) {
+        box.style.backgroundColor = "green";
+      });
+
+      /* 
+        Element.classList : 요소가 가진 클래스 목록.
+        Element.classList.add("문자열") : 인자로 전달된 문자열을 클래스로 추가한다.
+        Element.classList.remove("문자열") : 인자로 전달된 문자열을 클래스로 제거한다. 
+        Element.classList.contains("문자열") : 인자로 전달된 문자열을 클래스로 가지고 있는지 확인한다.
+        Element.classList.toggle("문자열") : 인인자로 전달된 문자열을 클래스로 가지고 있으면    제거하고 없으면 추가한다.
+
+        클래스에 대한 스타일을 CSS로 미리 작성하고, 클래스를 추가 및 제거하면 우선순위 문제를 어느정도 해결할 수 있다.
+        이벤트(마우스 클릭 등)와 함께 사용하면 스타일을 한번에 적용할 수 있다.
+
+        */
+      boxArr[0].classList.add("on");
+      //   boxArr[0].classList.remove("on");
+
+      boxArr.forEach(function (box) {
+        // if (box.classList.contains("on")) box.classList.remove("on");
+        // else box.classList.add("on");
+
+        box.classList.toggle("on");
+      });
+    </script>
+  </body>
+</html>
