@@ -122,7 +122,9 @@
 
       btnSlideList.forEach((btn) => {
         btn.addEventListener("click", function (e) {
-          changeSlide(index + parseInt(e.target.dataset.index));
+          let indexNum = parseInt(e.target.dataset.index);
+          if (indexNum + index < 0 || indexNum + index > 2) return;
+          changeSlide(index + indexNum);
         });
       });
 
