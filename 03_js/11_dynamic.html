@@ -73,6 +73,14 @@
         divElem.appendChild(boxElem);
       }
 
+      // 부모노드.removeChild() : 인자로 전달된 자식 노드를 삭제한다. 삭제된 노드를 반환한다.
+      let removedChild = document.body.removeChild(divElem);
+      //   document.body.innerHTML = "";
+
+      // 노드.revmove() : 노드를 삭제한다.
+      divElem.remove();
+      console.log(divElem);
+
       /* 
         innerHTML 주의 사항
             - 반복적으로 업데이트 시 속도가 느려질 수 있다.
