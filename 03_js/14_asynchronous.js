@@ -99,6 +99,7 @@ let movieList = [
     actors: ["조 샐다나", "샘 워싱턴", "시고니 위버"],
   },
   { id: 3, title: "유령", actors: ["설경구", "이하늬", "박소담"] },
+  { id: 4, title: "아바타", actors: [] },
 ];
 
 function getMovieById(id) {
@@ -141,23 +142,76 @@ movieForm.addEventListener("submit", (e) => {
     return;
   }
 
-  getMovieByTitle(inputTitle.value)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => alert(err));
+  renderMovie02(inputTitle.value);
+
+  // getMovieByTitle(inputTitle.value)
+  //   .then((res) => {
+  //     // ul태그 비우기
+  //     document.querySelector(".movieZIP").innerHTML = "";
+  //     // 받아온 데이터(배열)을 순회하며 renderMovie 실행
+  //     res.forEach((movie) => {
+  //       renderMovie(movie);
+  //     });
+  //   })
+  //   .catch((err) => alert(err));
 });
 
 function getMovieByTitle(title) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      let movie = movieList.filter((movie) => movie.title.includes(title));
+      let data = movieList.filter((movie) => movie.title.includes(title));
 
-      if (!movie) {
+      if (data.length === 0) {
         reject("찾는 영화가 없습니다.");
       }
 
-      resolve(movie);
-    }, 2000);
+      resolve(data);
+    }, 500);
   });
 }
+
+function renderMovie(movie) {
+  document.querySelector(".movieZIP").innerHTML += `
+  <li>
+    <h2>${movie.title}</h2>
+    <p>출연진 : ${movie.actors}</p>
+  </li>
+  `;
+}
+
+/* 
+  async/await
+    - 프로미스를 동기적으로 처리하는 함수.
+    - async 함수 내부에서 Promise를 반환하는 함수 앞에 await을 붙이면,
+      resolve되기 전까지 이후의 코드를 실행하지 않는다.
+    - Promise를 처리할 때 동기적으로 볼 수 있게 작성할 수 있어서 읽기가 편하다.
+    - async 함수에서 값을 return 하면 return 값을 resolve하는 Promise가 반환된다.
+*/
+
+async function renderMovie02(title) {
+  // Promise가 resolve 될 때까지 다음 코드를 실행하지 않는다. => 동기 코드처럼 동작한다.
+  try {
+    let result = await getMovieByTitle(title);
+
+    let movieZIP = document.querySelector(".movieZIP");
+    movieZIP.innerHTML = "";
+    result.forEach((movie) => {
+      movieZIP.innerHTML += `
+        <li>
+          <h2>${movie.title}</h2>
+          <p>${movie.actors}</h2>
+        </li>
+      `;
+    });
+    return 1;
+  } catch (e) {
+    // try/catch(e) : try문의 코드를 실행하다 에러가 발생하면 catch문이 실행된다.
+    alert(e);
+  }
+}
+
+let result = renderMovie02("슬램");
+console.log("async result : ", result);
+
+// async 함수 이용해서 getMovieByTitle과 같은 동작하는 함수 만들기
+// getMovieByTitleAsync
