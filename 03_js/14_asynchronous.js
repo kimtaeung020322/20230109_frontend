@@ -66,7 +66,7 @@ function render(data) {
         - resolve나 reject되기 전 상태 pending 상태.
         - API 통신을 하면 Promise로 결과값을 받게 된다.
 */
-let data02 = null;
+let data02 = "데이터";
 let promise = new Promise((resolve, reject) => {
   setTimeout(() => {
     // 데이터가 null일 경우 에러 발생
@@ -87,3 +87,77 @@ promise
   });
 
 // 서버에서 데이터를 받아서 화면에 그리는 상황 가정.
+let movieList = [
+  {
+    id: 1,
+    title: "더 퍼스트 슬램덩크",
+    actors: ["강백호", "서태웅", "정대만", "채치수", "안경선배"],
+  },
+  {
+    id: 2,
+    title: "아바타:물의 길",
+    actors: ["조 샐다나", "샘 워싱턴", "시고니 위버"],
+  },
+  { id: 3, title: "유령", actors: ["설경구", "이하늬", "박소담"] },
+];
+
+function getMovieById(id) {
+  console.log("서버에서 데이터 검색 중...");
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let movie = movieList.find((movie) => movie.id === id);
+
+      if (!movie) {
+        reject("찾는 영화가 없습니다.");
+      }
+
+      resolve(movie);
+    }, 2000);
+  });
+}
+
+getMovieById(3)
+  .then((res) => {
+    console.log("데이터 조회 성공!");
+    console.log(res);
+  })
+  .catch((err) => {
+    alert(err);
+  });
+
+/* 
+  1. input 태그값 alert창 => form 태그의 submit 이벤트가 발생했을 때
+  2. 가져온 값으로 영화 검색하는 함수.
+  3. 가져오는데 성공하면 화면에 보여주기.
+*/
+let inputTitle = document.getElementById("inputTitle");
+let movieForm = document.querySelector("form");
+
+movieForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (inputTitle.value === "") {
+    // 빈문자 입력하면 경고창 출력 후 함수 종료.
+    alert("검색어를 입력해주세요.");
+    return;
+  }
+
+  getMovieByTitle(inputTitle.value)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => alert(err));
+});
+
+function getMovieByTitle(title) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      let movie = movieList.filter((movie) => movie.title.includes(title));
+
+      if (!movie) {
+        reject("찾는 영화가 없습니다.");
+      }
+
+      resolve(movie);
+    }, 2000);
+  });
+}
