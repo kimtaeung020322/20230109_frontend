@@ -118,6 +118,37 @@ if (Car.isCar(car)) {
   console.log("자동차가 맞습니다.");
 }
 
-// Animal 클래스
+// Animal 클래스 만들기
 // species(종): ex) 포유류, 단공류, 양서류,
 // cry 메서드 만들기 => 울음소리 전달받아서 콘솔창에 출력.
+class Animal {
+  constructor(species, legs) {
+    this.species = species;
+    this.legs = legs;
+  }
+  cry(sound) {
+    console.log(sound);
+  }
+}
+
+class Cat extends Animal {
+  constructor(color) {
+    super("고양이", 4); // 상위 클래의 constructor를 호출한다.
+    this.color = color;
+  }
+
+  // Animal 클래스의 cry 메서드 덮어쓰기(오버라이드)
+  cry() {
+    super.cry("야옹~"); // 상위 클래스의 메서드를 호출.
+  }
+
+  // Animal 클래스를 상속 받아서 메서드를 추가.
+  jump() {
+    console.log("폴짝!");
+  }
+}
+
+let cat = new Cat("white");
+console.log(cat);
+cat.cry();
+cat.jump();

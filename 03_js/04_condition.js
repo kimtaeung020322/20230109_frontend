@@ -96,6 +96,7 @@ switch (typeof data) {
 }
 
 Math.floor(9.9); // 9
+
 /* 
     Math.floor(숫자) => 소수점 버림
     스코어가 90점이상 이면 A등급
