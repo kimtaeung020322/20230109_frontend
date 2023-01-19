@@ -86,4 +86,32 @@ console.log(roundNum);
 let randomNum = Math.random(); // 0이상 ~ 1미만의 랜덤한 실수.
 console.log(randomNum);
 
-// 121 => 1의 자리 올림 하기.
+// 121 => 1의 자리 올림 하기. => 121 => 130
+// 121 => 12.1 * 10
+let num = 121;
+console.log(Math.ceil(num / 10) * 10);
+
+// 1(포함) ~ 10(포함) 사이의 랜덤한 숫자 만들기.
+let result = Math.floor(Math.random() * 10 + 1);
+console.log(result);
+
+// 로또번호 1~45의 숫자 6개 추첨하는 함수 만들어보기. => 중복 허용 x.
+
+function getLottoNum() {
+  let result = [];
+  // result 배열의 개수가 6개 될 때가지 반복 실행.
+  while (result.length < 6) {
+    // 1부터 45 사이의 랜덤한 숫자 생성.
+    let num = Math.floor(Math.random() * 45 + 1);
+    // result 배열 안에 생성된 번호가 없으면 push
+    if (!result.includes(num)) result.push(num);
+  }
+
+  return result;
+}
+
+// 1 ~ 45 숫자를 가진 배열에서 6번만 가져오기.
+// 랜덤한 인덱스 생성 후 해당 인덱스번째 요소 가져오기.
+// 배열에서 중간 요소 가져오는 메서드 활용.
+
+console.log(getLottoNum());
