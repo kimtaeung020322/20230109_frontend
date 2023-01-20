@@ -212,6 +212,3 @@ async function renderMovie02(title) {
 
 let result = renderMovie02("슬램");
 console.log("async result : ", result);
-
-// async 함수 이용해서 getMovieByTitle과 같은 동작하는 함수 만들기
-// getMovieByTitleAsync

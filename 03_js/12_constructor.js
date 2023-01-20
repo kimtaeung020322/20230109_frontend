@@ -50,9 +50,9 @@ function User(name, age) {
   this.name = name;
   this.age = age;
 
-  //   this.hello = function () {
-  //     console.log(`안녕하세요 저는 ${this.age}세 ${this.name}입니다.`);
-  //   };
+  // this.hello = function () {
+  //   console.log(`안녕하세요 저는 ${this.age}세 ${this.name}입니다.`);
+  // };
 }
 
 // prototype : 인스턴스가 사용할 프로퍼티, 메서드를 상속시켜줄 수 있다.
@@ -97,7 +97,7 @@ console.log(user04);
 class Car {
   constructor(color, speed) {
     this.color = color;
-    this.spped = speed;
+    this.speed = speed;
   }
 
   // 프로토타입 메서드 생성 => 함축표현 사용.
@@ -133,7 +133,7 @@ class Animal {
 
 class Cat extends Animal {
   constructor(color) {
-    super("고양이", 4); // 상위 클래의 constructor를 호출한다.
+    super("고양이", 4); // 상위 클래스의 constructor를 호출한다.
     this.color = color;
   }
 

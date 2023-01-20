@@ -1,0 +1,43 @@
+:root {
+  font-size: 10px;
+}
+
+body {
+  font-family: speedeeK;
+  font-weight: 700;
+}
+
+header {
+  background-color: #fff;
+  position: relative;
+  z-index: 10000;
+  .headerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 140px;
+
+    #gnbList {
+      display: flex;
+      height: 141px;
+
+      &::after {
+        display: none;
+        content: "";
+        height: 300px;
+        width: 100%;
+        background-color: #fff;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: -1;
+      }
+
+      &:hover::after {
+        display: block;
+        border-top: 1px solid #ccc;
+      }
+    }
+  }
+}
