@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import UserCreate from "./UserCreate";
+import React from "react";
 
 function UserList({ userList, handleToggle, handleRemove }) {
+  console.log("UserList 렌더링");
   return (
     <div>
       <ul>
@@ -29,4 +29,4 @@ function UserList({ userList, handleToggle, handleRemove }) {
   );
 }
 
-export default UserList;
+export default React.memo(UserList);

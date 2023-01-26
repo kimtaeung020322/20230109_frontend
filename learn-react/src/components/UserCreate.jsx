@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function UserCreate({ handleSubmit, handleInputs, inputs }) {
   const { email, name } = inputs;
@@ -24,4 +24,4 @@ function UserCreate({ handleSubmit, handleInputs, inputs }) {
   );
 }
 
-export default UserCreate;
+export default React.memo(UserCreate);
