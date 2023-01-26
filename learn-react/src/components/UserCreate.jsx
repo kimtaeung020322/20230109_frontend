@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const initialInputs = {
   email: "",
@@ -9,6 +9,8 @@ function UserCreate({ onChange }) {
   const [inputs, setInputs] = useState(initialInputs);
   const { email, name } = inputs;
 
+  const inputRef = useRef();
+
   const handleInputs = (e) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
@@ -16,6 +18,7 @@ function UserCreate({ onChange }) {
 
   const handleReset = () => {
     setInputs(initialInputs);
+    inputRef.current.focus();
   };
 
   const handleSubmit = () => {
@@ -23,9 +26,19 @@ function UserCreate({ onChange }) {
     handleReset();
   };
 
+  useEffect(() => {
+    console.log("render!");
+  });
+
   return (
     <div>
-      <input type="text" name="name" value={name} onChange={handleInputs} />
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleInputs}
+        ref={inputRef}
+      />
       <input type="text" name="email" value={email} onChange={handleInputs} />
       <button onClick={handleSubmit}>등록</button>
       <button onClick={handleReset}>초기화</button>
