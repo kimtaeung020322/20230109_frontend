@@ -8,13 +8,29 @@ const initialState = [
   { id: 3, name: "test_user", email: "cocacola@gmail.com", active: false },
 ];
 
+const initialInputs = {
+  email: "",
+  name: "",
+};
+
 function Users() {
   const [userList, setUserList] = useState(initialState);
+  const [inputs, setInputs] = useState(initialInputs);
 
+  const { email, name } = inputs;
   // 렌더링과 별개로 유지되는 변수
   const nextId = useRef(4);
 
-  const handleSubmit = (name, email) => {
+  const handleInputs = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setInputs(initialInputs);
+  };
+
+  const handleSubmit = () => {
     /* 
           스프레드(펼침) 연산자를 이용한 방법.
           setUserList([
@@ -24,6 +40,7 @@ function Users() {
       */
     //  Array.prototype.concat : 인자로 전달된 요소나 배열을 기존 배열에 합쳐서 새로운 배열을 반환
     setUserList(userList.concat({ id: nextId.current++, name, email })); // 후위 연산자를 이용해서 값을 사용 후 증가
+    setInputs(initialInputs);
   };
 
   const handleRemove = (id) => {
@@ -50,7 +67,11 @@ function Users() {
 
   return (
     <div>
-      <UserCreate onChange={handleSubmit} />
+      <UserCreate
+        handleSubmit={handleSubmit}
+        handleInputs={handleInputs}
+        inputs={inputs}
+      />
       <UserList
         userList={userList}
         handleToggle={handleToggle}
