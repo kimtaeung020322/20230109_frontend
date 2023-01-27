@@ -35,6 +35,14 @@ const Button = styled.button`
   font-weight: 700;
 
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.hover_color};
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.active_color};
+  }
 `;
 
 export default TodoInput;
