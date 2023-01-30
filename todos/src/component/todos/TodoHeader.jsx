@@ -45,9 +45,10 @@ const PercentageBar = styled.div`
   &::after {
     content: "";
     display: block;
-    width: ${({ percentage }) => percentage}%;
+    transform-origin: left;
+    transform: scaleX(${({ percentage }) => percentage}%);
     height: 100%;
-    transition: width 0.4s;
+    transition: transform 0.4s;
     background-color: ${({ theme }) => theme.colors.main_color};
   }
 `;
