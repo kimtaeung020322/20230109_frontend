@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function Section() {
   const [index, setIndex] = useState(0);
@@ -34,12 +34,20 @@ function Section() {
       window.removeEventListener("wheel", handleIndex, { passive: false });
   }, [index]);
 
-  console.log(index);
+  // 버튼 클릭시 인덱스 변경
+  const handleIndexBtn = (index) => {
+    setIndex(index);
+  };
   return (
     <Container>
       <SectionItem bgColor="red">1</SectionItem>
       <SectionItem bgColor="blue">2</SectionItem>
       <SectionItem bgColor="yellow">3</SectionItem>
+      <Btns>
+        <BtnPage onClick={() => handleIndexBtn(0)} active={index === 0} />
+        <BtnPage onClick={() => handleIndexBtn(1)} active={index === 1} />
+        <BtnPage onClick={() => handleIndexBtn(2)} active={index === 2} />
+      </Btns>
     </Container>
   );
 }
@@ -56,6 +64,43 @@ const SectionItem = styled.section`
 
   height: 100vh;
   background-color: ${({ bgColor }) => bgColor};
+`;
+
+const Btns = styled.div`
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+`;
+
+const BtnPage = styled.div`
+  /* 버튼 모양 */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: 0.4s;
+
+  cursor: pointer;
+
+  /* 버튼에 호버시 배경색 하얀색으로, 크기 1.2배 */
+  &:hover {
+    transform: scale(1.2);
+    background-color: #fff;
+  }
+
+  /* 버튼끼리 여백 */
+  & + & {
+    margin-top: 10px;
+  }
+
+  /* 인덱스에 해당하는 버튼 크게, 하얗게 */
+  ${({ active }) =>
+    active &&
+    css`
+      background-color: #fff;
+      transform: scale(1.2);
+    `}
 `;
 
 export default Section;
