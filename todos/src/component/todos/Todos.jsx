@@ -4,7 +4,14 @@ import TodoBody from "./TodoBody";
 import TodoHeader from "./TodoHeader";
 import TodoInput from "./TodoInput";
 
-function reducer(state, action) {}
+function reducer(state, action) {
+  switch (action.type) {
+    case "CREATE_TODO":
+      return state.concat({ id: action.id, text: action.text, done: false });
+    default:
+      return state;
+  }
+}
 
 function Todos() {
   const [todos, dispatch] = useReducer(reducer, [
@@ -12,11 +19,12 @@ function Todos() {
     { id: 2, text: "투두리스트 기능 구현하기", done: false },
     { id: 3, text: "리팩토링 하기", done: false },
   ]);
+
   return (
     <Container>
       <TodoHeader todos={todos} />
-      <TodoBody />
-      <TodoInput />
+      <TodoBody todos={todos} />
+      <TodoInput dispatch={dispatch} />
     </Container>
   );
 }

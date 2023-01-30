@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
-function TodoInput() {
+function TodoInput({ dispatch }) {
   const [text, setText] = useState("");
+  const nextId = useRef(4);
 
   const handleText = (e) => {
     setText(e.target.value);
   };
 
-  console.log(text);
+  const handleSubmit = () => {
+    dispatch({ type: "CREATE_TODO", id: nextId.current++, text });
+  };
 
   return (
     <Container>
       <Input placeholder="할일을 입력해주세요." onChange={handleText} />
-      <Button>등록</Button>
+      <Button onClick={handleSubmit}>등록</Button>
     </Container>
   );
 }
