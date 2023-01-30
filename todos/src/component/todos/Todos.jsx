@@ -1,12 +1,20 @@
+import { useReducer } from "react";
 import styled from "styled-components";
 import TodoBody from "./TodoBody";
 import TodoHeader from "./TodoHeader";
 import TodoInput from "./TodoInput";
 
+function reducer(state, action) {}
+
 function Todos() {
+  const [todos, dispatch] = useReducer(reducer, [
+    { id: 1, text: "투두리스트 스타일링", done: true },
+    { id: 2, text: "투두리스트 기능 구현하기", done: false },
+    { id: 3, text: "리팩토링 하기", done: false },
+  ]);
   return (
     <Container>
-      <TodoHeader />
+      <TodoHeader todos={todos} />
       <TodoBody />
       <TodoInput />
     </Container>

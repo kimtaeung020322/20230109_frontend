@@ -1,9 +1,18 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 function TodoInput() {
+  const [text, setText] = useState("");
+
+  const handleText = (e) => {
+    setText(e.target.value);
+  };
+
+  console.log(text);
+
   return (
     <Container>
-      <Input placeholder="할일을 입력해주세요." />
+      <Input placeholder="할일을 입력해주세요." onChange={handleText} />
       <Button>등록</Button>
     </Container>
   );
