@@ -3,10 +3,18 @@ import styled from "styled-components";
 
 function Section() {
   const [index, setIndex] = useState(0);
+  const isScrolling = useRef(false);
 
   useEffect(() => {
     const handleIndex = (e) => {
       e.preventDefault();
+      // 스크롤 중이라면 함수 종료
+      if (isScrolling.current) return;
+      isScrolling.current = true; // 스크롤 중임을 명시
+      setTimeout(() => {
+        isScrolling.current = false; // 스크롤이 끝날 쯤에 다시 스크롤 false로
+      }, 500);
+
       // e.deltaY : 휠 방향에 따라 양수(내림)/음수(올림)
       if (e.deltaY > 0) {
         if (index < 2) setIndex(index + 1);
