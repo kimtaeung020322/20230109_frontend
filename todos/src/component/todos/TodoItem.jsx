@@ -4,11 +4,10 @@ import {
   AiFillCheckCircle,
   AiFillDelete,
 } from "react-icons/ai";
-import { useContext } from "react";
-import { TodoDispatchContext } from "../../context/todos";
+import { useTodoDispatch } from "../../context/todos";
 
 function TodoItem({ todo }) {
-  const dispatch = useContext(TodoDispatchContext);
+  const dispatch = useTodoDispatch();
 
   const handleToggle = () => {
     dispatch({ type: "TOGGLE_TODO", id: todo.id });

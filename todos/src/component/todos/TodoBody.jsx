@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { TodoStateContext } from "../../context/todos";
+import { useTodoState } from "../../context/todos";
 import TodoItem from "./TodoItem";
 
 function TodoBody() {
-  const todos = useContext(TodoStateContext);
+  const todos = useTodoState();
 
   return (
     <Container>
