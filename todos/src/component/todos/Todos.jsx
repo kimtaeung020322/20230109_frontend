@@ -34,9 +34,9 @@ function Todos() {
   return (
     <TodoProvider>
       <Container>
-        <TodoHeader todos={todos} />
-        <TodoBody todos={todos} dispatch={dispatch} />
-        <TodoInput dispatch={dispatch} />
+        <TodoHeader />
+        <TodoBody />
+        <TodoInput />
       </Container>
     </TodoProvider>
   );

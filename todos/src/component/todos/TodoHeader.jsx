@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { NumContext } from "../../context/todos";
+import { NumContext, TodoStateContext } from "../../context/todos";
 
-function TodoHeader({ todos }) {
+function TodoHeader() {
+  const todos = useContext(TodoStateContext);
   // 실행되는 로컬 시간을 한글로 표기.
   const dateStr = new Date().toLocaleDateString("ko-KR", {
     dateStyle: "full",

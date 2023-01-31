@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
+import { TodoDispatchContext } from "../../context/todos";
 
-function TodoInput({ dispatch }) {
+function TodoInput() {
   const [text, setText] = useState("");
   const nextId = useRef(4);
   const inputRef = useRef();
+
+  const dispatch = useContext(TodoDispatchContext);
 
   const handleText = (e) => {
     setText(e.target.value);
