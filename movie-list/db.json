@@ -1,29 +1,15 @@
 {
   "todos": [
     {
-      "id": 1,
-      "text": "API 연동 연습하기",
-      "done": true
-    },
-    {
       "id": 2,
       "text": "TMDB 가입하기",
       "done": false
     },
     {
-      "id": 3,
-      "text": "리액트 라우터 배우기",
-      "done": true
-    },
-    {
-      "text": "ㅁㄴㅇㅁㅇ",
+      "text": "ㅁㄴㅇㄴㅁㅇasdadㄴㅁ",
       "done": false,
-      "id": 5
-    },
-    {
-      "text": "ㅁㄴㅇㄴㅁㅇㄴㅁ",
-      "done": false,
-      "id": 6
+      "id": 7
     }
-  ]
+  ],
+  "comments": [{ "id": 1, "body": "todoaskldjsalkdj", "like_count": 0 }]
 }

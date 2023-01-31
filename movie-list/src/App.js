@@ -9,14 +9,15 @@ function App() {
     setText(e.target.value);
   };
 
-  const fetchData = () => {
-    axios
-      .get("http://localhost:5000/todos")
-      .then((res) => setTodos(res.data))
-      .catch((err) => {
-        console.log(err);
-        setTodos(null);
-      });
+  const fetchData = async () => {
+    // async/await : async 함수 내부에서 Promise 앞에 await 붙이면
+    // resolve될 때까지 다음 코드를 실행하지 않는다. => 동기적으로 처리
+    try {
+      let result = await axios.get("http://localhost:5000/todos");
+      setTodos(result.data);
+    } catch (e) {
+      setTodos(null);
+    }
   };
 
   useEffect(() => {
@@ -24,35 +25,34 @@ function App() {
     fetchData();
   }, []);
 
-  const handleSubmit = () => {
-    axios
-      .post("http://localhost:5000/todos", {
-        text: text,
-        done: false,
-      })
-      .then((res) => {
-        // 등록에 성공하면 데이터 다시 받아오기
-        // if(res.)
-        console.log(res);
-        if (res.status === 201) alert("할일이 등록되었습니다.");
-        fetchData();
-      });
-  };
-
-  const handleToggle = (id, done) => {
-    axios
-      .patch("http://localhost:5000/todos/" + id, {
-        done,
-      })
-      .then((res) => {
-        fetchData();
-      });
-  };
-
-  const handleRemove = (id) => {
-    axios.delete("http://localhost:5000/todos/" + id).then((res) => {
-      fetchData();
+  const handleSubmit = async () => {
+    let result = await axios.post("http://localhost:5000/todos", {
+      text: text,
+      done: false,
     });
+
+    // 등록에 성공하면 데이터 다시 받아오기
+    // if(res.)
+    console.log(result);
+    if (result.status === 201) alert("할일이 등록되었습니다.");
+    fetchData();
+  };
+
+  const handleToggle = async (id, done) => {
+    await axios.patch("http://localhost:5000/todos/" + id, {
+      done,
+    });
+
+    fetchData();
+  };
+
+  const handleRemove = async (id) => {
+    try {
+      await axios.delete("http://localhost:5000/todos/" + id);
+      fetchData();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   if (!todos) return <div>데이터가 없습니다.</div>;
