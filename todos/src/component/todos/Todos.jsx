@@ -1,5 +1,6 @@
-import { useReducer } from "react";
+import { useContext, useReducer } from "react";
 import styled from "styled-components";
+import { NumContext, TodoProvider } from "../../context/todos";
 import TodoBody from "./TodoBody";
 import TodoHeader from "./TodoHeader";
 import TodoInput from "./TodoInput";
@@ -26,12 +27,18 @@ function Todos() {
     { id: 3, text: "리팩토링 하기", done: false },
   ]);
 
+  const num = useContext(NumContext);
+
+  console.log("num context : ", num);
+
   return (
-    <Container>
-      <TodoHeader todos={todos} />
-      <TodoBody todos={todos} dispatch={dispatch} />
-      <TodoInput dispatch={dispatch} />
-    </Container>
+    <TodoProvider>
+      <Container>
+        <TodoHeader todos={todos} />
+        <TodoBody todos={todos} dispatch={dispatch} />
+        <TodoInput dispatch={dispatch} />
+      </Container>
+    </TodoProvider>
   );
 }
 
