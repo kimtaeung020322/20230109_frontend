@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
+import React from "react";
 
-function TitleBox({ title, tabList }) {
-  const [filterList, setFilterList] = useState([
-    { id: 1, text: "오늘", url: "/treding/all/day", active: true },
-    { id: 2, text: "이번주", url: "/treding/all/week", active: false },
-  ]);
+function TitleBox({ title, filter, fetchData }) {
+  const [filterList, setFilterList] = useState(filter);
 
   const handleFilter = (id) => {
     // 누른 버튼만 active true, 나머지는 false로
@@ -17,6 +15,12 @@ function TitleBox({ title, tabList }) {
       )
     );
   };
+
+  useEffect(() => {
+    const { url } = filterList.find((filter) => filter.active);
+    fetchData(url);
+  }, [filterList, fetchData]);
+
   return (
     <Container>
       <SectionTitle>{title}</SectionTitle>
@@ -61,4 +65,4 @@ const TabItem = styled.li`
     `}
 `;
 
-export default TitleBox;
+export default React.memo(TitleBox);
