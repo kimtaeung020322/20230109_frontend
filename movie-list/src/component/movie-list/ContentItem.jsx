@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-function ContentItem() {
+function ContentItem({ item }) {
+  const { title, release_date, poster_path } = item;
+
+  const img_url = "https://image.tmdb.org/t/p/w154" + poster_path;
   return (
     <Container>
-      <ImgBox></ImgBox>
-      <Title>영화제목</Title>
-      <ReleaseDate>2023.02.02</ReleaseDate>
+      <ImgBox>
+        <img src={img_url} alt={title} />
+      </ImgBox>
+      <Title>{title}</Title>
+      <ReleaseDate>{release_date}</ReleaseDate>
     </Container>
   );
 }
