@@ -23,9 +23,17 @@ const Container = styled.li`
 `;
 
 const ImgBox = styled.div`
-  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
   height: 170px;
   background-color: #eee;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+  }
 `;
 
 const Title = styled.h3`

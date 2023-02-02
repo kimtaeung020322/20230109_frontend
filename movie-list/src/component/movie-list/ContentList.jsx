@@ -37,6 +37,7 @@ const Container = styled.div`
 const ItemList = styled.ul`
   display: flex;
   margin-top: 20px;
+  overflow-x: auto;
 `;
 
 export default ContentList;
