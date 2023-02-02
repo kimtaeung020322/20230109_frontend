@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import TitleBox from "../TitleBox";
+import ContentList from "../ContentList";
 
 function Home() {
   return (
     <Container>
-      <TitleBox title="트렌딩" />
+      <ContentList title="트렌딩" />
+      <ContentList title="What's Popular" />
+      <ContentList title="Free to Watch" />
     </Container>
   );
 }
