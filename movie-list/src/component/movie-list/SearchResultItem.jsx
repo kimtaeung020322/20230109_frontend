@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function SearchResultItem({ data }) {
+function SearchResultItem({ data, onMouseDown }) {
   const { id, media_type, title, name } = data;
+
   return (
     <Container>
-      <Link to={`${media_type}/${id}`}>
+      <CustomLink to={`${media_type}/${id}`}>
         ({media_type}){title || name}
-      </Link>
+      </CustomLink>
     </Container>
   );
 }
@@ -15,11 +16,15 @@ function SearchResultItem({ data }) {
 const Container = styled.li`
   background: #fff;
   border-bottom: 1px solid #ccc;
-  padding: 5px;
 
   &:hover {
     background-color: #eee;
   }
+`;
+
+const CustomLink = styled(Link)`
+  display: block;
+  padding: 5px;
 `;
 
 export default SearchResultItem;

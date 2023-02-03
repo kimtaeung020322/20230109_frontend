@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { tmdbAxios } from "../../api/tmdbAxios";
 import SearchResultItem from "./SearchResultItem";
@@ -37,6 +38,11 @@ function Search() {
     setSearchResult(data.results);
   }, [query]);
 
+  const navigate = useNavigate();
+  const handleLink = (url) => {
+    navigate(url);
+  };
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -51,7 +57,11 @@ function Search() {
       <Input
         type="text"
         onChange={handleQuery}
-        onBlur={() => setSearchResult(null)}
+        onBlur={() => {
+          setTimeout(() => {
+            setSearchResult(null);
+          }, 200);
+        }}
       />
       <ResultList>
         {searchResult?.map((data) => (
