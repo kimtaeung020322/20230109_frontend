@@ -139,6 +139,7 @@ main {
   nav.on {
     transform: translate(0);
     transition: transform 0s 0s;
+    opacity: 1;
   }
 
   nav {
@@ -149,7 +150,9 @@ main {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.4);
 
-    transition: transform 0s 0.4s;
+    opacity: 0;
+
+    transition: transform 0s 0.4s, opacity 0.4s;
     transform: translateX(100%);
   }
 
