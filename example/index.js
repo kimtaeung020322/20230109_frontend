@@ -4,6 +4,9 @@
 */
 let btnSide = document.querySelector(".btnSide");
 let nav = document.querySelector("nav");
+let modalBg = document.querySelector(".modalBg");
+let btnCloseModal = document.querySelector(".modalBg .btnBox button");
+
 btnSide.addEventListener("click", function () {
   nav.classList.add("on");
 });
@@ -13,4 +16,16 @@ nav.addEventListener("click", function (e) {
   if (e.target === e.currentTarget) {
     nav.classList.remove("on");
   }
+});
+
+btnCloseModal.addEventListener("click", function () {
+  modalBg.classList.add("hide");
+  setTimeout(() => {
+    modalBg.style.display = "none";
+  }, 300);
+});
+
+window.addEventListener("resize", function () {
+  // 사이즈 조절을 했더니 창의 너비가 800보다 커지면 nav 태그의 on 클래스 삭제
+  console.log("사이즈 조절");
 });
