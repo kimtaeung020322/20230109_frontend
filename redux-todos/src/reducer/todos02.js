@@ -1,17 +1,18 @@
 // redux toolkit 활용 버전
 
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = [
-  { id: 1, text: "리덕스 배우기", done: true },
-  { id: 2, text: "리덕스 응용하기", done: false },
-  { id: 3, text: "리덕스로 todos 만들기", done: false },
-];
+import { getTodo } from "../api/todos";
+
+export const fetchData = createAsyncThunk("fetchTodo", getTodo);
 
 const todoSlice = createSlice({
   name: "todos",
-  initialState,
+  initialState: [],
   reducers: {
+    [fetchData.fulfilled()]: (state, action) => {
+      return action.payload;
+    },
     createTodo: {
       reducer: (state, action) => {
         // reduxt toolkit에는 immer 라이브러리가 포함된다.
@@ -29,6 +30,9 @@ const todoSlice = createSlice({
         };
       },
     },
+    fetchTodo: (_, action) => {
+      return action.payload;
+    },
     toggleTodo: (state, action) => {
       const todo = state.find((todo) => todo.id === action.payload);
       todo.done = !todo.done;
@@ -37,9 +41,22 @@ const todoSlice = createSlice({
       return state.filter((todo) => todo.id !== action.payload);
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.fulfilled, (_, action) => {
+        return action.payload;
+      })
+      .addCase(fetchData.pending, () => {
+        return [{ id: 1, text: "로딩 중", done: false }];
+      })
+      .addCase(fetchData.rejected, () => {
+        return [{ id: 1, text: "실패", done: false }];
+      });
+  },
 });
 
-export const { removeTodo, createTodo, toggleTodo } = todoSlice.actions;
+export const { removeTodo, createTodo, toggleTodo, fetchTodo } =
+  todoSlice.actions;
 
 const todos = todoSlice.reducer;
 export default todos;
