@@ -6,8 +6,26 @@ export const getTodo = async () => {
   return data;
 };
 
-export const postTodo = async () => {};
+export const postTodo = async (text) => {
+  let { data } = await axios.post("http://localhost:5000/todos", {
+    done: false,
+    text,
+  });
 
-export const deleteTodo = async () => {};
+  return data;
+};
 
-export const updateToggle = async () => {};
+export const deleteTodo = async (id) => {
+  let { data } = await axios.delete("http://localhost:5000/todos/" + id);
+
+  return data;
+};
+
+export const updateToggle = async (id, done) => {
+  let { data } = await axios.patch("http://localhost:5000/todos/" + id, {
+    done,
+  });
+
+  console.log(data);
+  return data;
+};
