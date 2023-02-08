@@ -32,9 +32,7 @@ const getTodos = (state) => state.todos;
 
 // reselect : 골라낸 상태에서 다시 값을 골라낸다. => 이전 상태값이 변하지 않으면 재계산 x.
 export const getUndoneCount = createSelector(getTodos, (state) => {
-  console.time("계산");
   const undoneCount = state.filter((todo) => !todo.done).length;
-  console.timeEnd("계산");
 
   return undoneCount;
 });

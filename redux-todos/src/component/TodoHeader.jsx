@@ -5,8 +5,6 @@ function TodoHeader() {
   const undoneCount = useSelector(getUndoneCount);
   const totalCount = useSelector(getTotalCount);
 
-  console.log("TodoHeader render...");
-
   return (
     <div>
       <p>2023년 02월 08일</p>

@@ -1,7 +1,5 @@
 // src/reducer/counter.js
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
 // 액션 타입 정의
 export const INCREASE = "INCREASE";
 export const DECREASE = "DECREASE";
