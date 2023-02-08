@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { nanoid } from "@reduxjs/toolkit";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createTodo } from "../reducer/todos";
+import { createTodo } from "../reducer/todos02";
 
 function TodoCreate() {
   const [text, setText] = useState("테스트");

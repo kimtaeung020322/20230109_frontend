@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { removeTodo, toggleTodo } from "../reducer/todos";
+import { removeTodo, toggleTodo } from "../reducer/todos02";
 
 function TodoItem({ todo }) {
   const { id, text, done } = todo;
