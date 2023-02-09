@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-function Button({ text, width, bgColor, color }) {
+function Button({ text, width, bgColor, color, type }) {
   return (
-    <StyledButton width={width} bgColor={bgColor} color={color}>
+    <StyledButton width={width} bgColor={bgColor} color={color} type={type}>
       {text}
     </StyledButton>
   );
