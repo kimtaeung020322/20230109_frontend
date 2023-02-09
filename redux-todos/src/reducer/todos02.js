@@ -1,6 +1,6 @@
 // redux toolkit 활용 버전
 
-import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getTodo } from "../api/todos";
 
