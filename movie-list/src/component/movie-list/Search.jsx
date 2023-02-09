@@ -65,7 +65,7 @@ function Search() {
       />
       <ResultList>
         {searchResult?.map((data) => (
-          <SearchResultItem data={data} />
+          <SearchResultItem key={data.id} data={data} />
         ))}
       </ResultList>
     </Container>
